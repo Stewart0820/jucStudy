@@ -33,23 +33,64 @@ class Share{
     }
 
     //-1
-    public void decr(){
+    public void decr() throws InterruptedException{
         lock.lock();
         try {
             //判断
             while(number!=1){
-                lock.wait();
+                condition.await();
             }
             number--;
             System.out.println(Thread.currentThread().getName()+"::"+number);
             //通知
             condition.signalAll();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
+        }  finally {
             lock.unlock();
         }
     }
 }
 public class ThreadDemo02 {
+    public static void main(String[] args) {
+        Share share = new Share();
+        new Thread(()->{
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.incr();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"AA").start();
+
+        new Thread(()->{
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.decr();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        },"BB").start();
+
+        new Thread(()->{
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.incr();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"CC").start();
+
+        new Thread(()->{
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.decr();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"DD").start();
+    }
 }

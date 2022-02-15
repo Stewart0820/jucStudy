@@ -30,6 +30,7 @@ public class SaleTicket {
     public static void main(String[] args) {
         final Ticket ticket = new Ticket();
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 for (int i = 0; i < 110; i++) {
                     ticket.sale();
@@ -38,6 +39,7 @@ public class SaleTicket {
         },"AA").start();
 
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 for (int i = 0; i < 110; i++) {
                     ticket.sale();
@@ -46,6 +48,7 @@ public class SaleTicket {
         },"BB").start();
 
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 for (int i = 0; i < 110; i++) {
                     ticket.sale();

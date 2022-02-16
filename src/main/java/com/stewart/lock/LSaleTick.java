@@ -17,8 +17,11 @@ class LTicket {
 
     /**
      * 创建可重入锁
+     *
+     * 默认是非公平锁
+     * 传入true是公平锁
      */
-    private final ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock lock = new ReentrantLock(true);
 
     public void sale() {
         //上锁

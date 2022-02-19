@@ -1,6 +1,5 @@
 package com.stewart.lock;
 
-import sun.security.krb5.internal.Ticket;
 
 import java.util.concurrent.locks.ReentrantLock;
 
